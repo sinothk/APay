@@ -8,7 +8,7 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.sinothk.pay.demo.R;
-import com.sinothk.pay.wx.Constants;
+import com.sinothk.pay.demo.wxDemo.Constants;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
