@@ -29,21 +29,21 @@
 <!--        <item name="android:widgetLayout">@layout/mm_preference_checkbox</item>-->
 <!--    </style>-->
 
-    <style name="MMPreference.RingtonePreference">
-        <item name="android:ringtoneType">ringtone</item>
-        <item name="android:showSilent">true</item>
-        <item name="android:showDefault">true</item>
-    </style>
+<!--    <style name="MMPreference.RingtonePreference">-->
+<!--        <item name="android:ringtoneType">ringtone</item>-->
+<!--        <item name="android:showSilent">true</item>-->
+<!--        <item name="android:showDefault">true</item>-->
+<!--    </style>-->
 
-    <style name="MMPreference.DialogPreference.YesNoPreference">
-        <item name="android:positiveButtonText">@android:string/yes</item>
-        <item name="android:negativeButtonText">@android:string/no</item>
-    </style>
+<!--    <style name="MMPreference.DialogPreference.YesNoPreference">-->
+<!--        <item name="android:positiveButtonText">@android:string/yes</item>-->
+<!--        <item name="android:negativeButtonText">@android:string/no</item>-->
+<!--    </style>-->
 
-    <style name="MMPreference.DialogPreference">
-        <item name="android:positiveButtonText">@android:string/ok</item>
-        <item name="android:negativeButtonText">@android:string/cancel</item>
-    </style>
+<!--    <style name="MMPreference.DialogPreference">-->
+<!--        <item name="android:positiveButtonText">@android:string/ok</item>-->
+<!--        <item name="android:negativeButtonText">@android:string/cancel</item>-->
+<!--    </style>-->
 
 <!--    <style name="MMPreference.DialogPreference.EditTextPreference">-->
 <!--        <item name="android:dialogLayout">@layout/mm_preference_dialog_edittext</item>-->
@@ -76,10 +76,10 @@
 <!--        <item name="android:checkboxStyle">@style/MMCheckBox</item>-->
 <!--    </style>-->
 
-    <style name="MMTheme.Preference" parent="MMTheme.Basic">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowTitleSize">0dp</item>
-    </style>
+<!--    <style name="MMTheme.Preference" parent="MMTheme.Basic">-->
+<!--        <item name="android:windowNoTitle">true</item>-->
+<!--        <item name="android:windowTitleSize">0dp</item>-->
+<!--    </style>-->
 
 <!--    <style name="MMTheme.Search" parent="MMTheme.Basic">-->
 <!--        <item name="android:windowBackground">@color/semitransparent</item>-->
