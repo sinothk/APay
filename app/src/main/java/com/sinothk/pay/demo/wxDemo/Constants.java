@@ -1,4 +1,4 @@
-package com.sinothk.pay.demo;
+package com.sinothk.pay.demo.wxDemo;
 
 public class Constants {
 

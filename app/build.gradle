@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
-// com.zkhy.community
+// com.sinothk.pay.demo
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "com.sinothk.pay.demo"
+        applicationId "com.zkhy.community"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1

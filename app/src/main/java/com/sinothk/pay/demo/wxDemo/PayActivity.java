@@ -1,4 +1,4 @@
-package com.sinothk.pay.demo;
+package com.sinothk.pay.demo.wxDemo;
 
 
 import android.os.Bundle;
@@ -8,10 +8,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.tencent.mm.opensdk.constants.Build;
+import com.sinothk.pay.APay;
+import com.sinothk.pay.demo.R;
 import com.tencent.mm.opensdk.modelpay.PayReq;
-import com.tencent.mm.opensdk.openapi.IWXAPI;
-import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import org.json.JSONObject;
 
@@ -32,7 +31,7 @@ import javax.net.ssl.X509TrustManager;
 
 public class PayActivity extends AppCompatActivity {
     private static String TAG = "PayActivity";
-    private IWXAPI api;
+//    private IWXAPI api;
 
 //    https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_1
 
@@ -41,16 +40,18 @@ public class PayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wx_pay);
 
+        APay.initWxPay(this, Constants.APP_ID);
+
+
 //        https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_5
 
-        api = WXAPIFactory.createWXAPI(this, Constants.APP_ID);
+//        api = WXAPIFactory.createWXAPI(this, Constants.APP_ID);
 
         findViewById(R.id.check_pay_btn).setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                boolean isPaySupported = api.getWXAppSupportAPI() >= Build.PAY_SUPPORTED_SDK_INT;
-                Toast.makeText(PayActivity.this, String.valueOf(isPaySupported), Toast.LENGTH_SHORT).show();
+                Toast.makeText(PayActivity.this, APay.checkWxEnable() ? "版本支持支付" : "版本不支持", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -74,7 +75,7 @@ public class PayActivity extends AppCompatActivity {
                             URL url = new URL(httpsUrl);
 //                            URLConnection urlConnection = url.openConnection();
 //                            HttpsURLConnection httpsConn = (HttpsURLConnection) urlConnection;
-                            HttpURLConnection httpsConn = null;
+                            HttpURLConnection httpsConn;
                             //关键代码
                             //ignore https certificate validation |忽略 https 证书验证
                             if (url.getProtocol().toUpperCase().equals("HTTPS")) {
@@ -130,7 +131,8 @@ public class PayActivity extends AppCompatActivity {
                                     });
 
                                     // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
-                                    api.sendReq(req);
+//                                    api.sendReq(req);
+                                    APay.sendReq(req);
                                 } else {
                                     Log.d("PAY_GET", "服务器请求错误");
                                     Toast.makeText(PayActivity.this, "服务器请求错误", Toast.LENGTH_SHORT).show();

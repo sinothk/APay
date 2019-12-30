@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.sinothk.pay.demo.wxDemo.PayActivity;
+
 public class WXDemoMainActivity extends AppCompatActivity {
 
     @Override

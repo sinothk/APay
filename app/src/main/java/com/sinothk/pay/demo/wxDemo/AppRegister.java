@@ -1,4 +1,4 @@
-package com.sinothk.pay.demo;
+package com.sinothk.pay.demo.wxDemo;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
