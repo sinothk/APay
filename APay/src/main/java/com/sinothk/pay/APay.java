@@ -14,7 +14,7 @@ public class APay {
         WxPayUtil.createWXAPI(mContext, appId);
     }
 
-    public static void sendReq(PayReq payReq) {
+    public static void sendWxReq(PayReq payReq) {
         WxPayUtil.sendReq(payReq);
     }
 

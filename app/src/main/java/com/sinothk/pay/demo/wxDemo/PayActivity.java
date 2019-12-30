@@ -132,7 +132,7 @@ public class PayActivity extends AppCompatActivity {
 
                                     // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
 //                                    api.sendReq(req);
-                                    APay.sendReq(req);
+                                    APay.sendWxReq(req);
                                 } else {
                                     Log.d("PAY_GET", "服务器请求错误");
                                     Toast.makeText(PayActivity.this, "服务器请求错误", Toast.LENGTH_SHORT).show();
