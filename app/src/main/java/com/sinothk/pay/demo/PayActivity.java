@@ -1,21 +1,22 @@
 package com.sinothk.pay.demo;
 
 
-import org.json.JSONObject;
-
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.tencent.mm.opensdk.constants.Build;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
-public class PayActivity extends Activity {
+import org.json.JSONObject;
+
+public class PayActivity extends AppCompatActivity {
 
     private IWXAPI api;
 
@@ -26,7 +27,7 @@ public class PayActivity extends Activity {
 
         api = WXAPIFactory.createWXAPI(this, "wxb4ba3c02aa476ea1");
 
-        Button appayBtn = (Button) findViewById(R.id.appay_btn);
+        Button appayBtn = findViewById(R.id.appay_btn);
         appayBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -44,7 +45,6 @@ public class PayActivity extends Activity {
                     if (buf != null && buf.length > 0) {
                         String content = new String(buf);
                         Log.e("get server pay params:", content);
-
 
                         JSONObject json = new JSONObject(content);
                         if (null != json && !json.has("retcode")) {
@@ -76,7 +76,9 @@ public class PayActivity extends Activity {
                 payBtn.setEnabled(true);
             }
         });
-        Button checkPayBtn = (Button) findViewById(R.id.check_pay_btn);
+
+        Button checkPayBtn = findViewById(R.id.check_pay_btn);
+
         checkPayBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -86,5 +88,4 @@ public class PayActivity extends Activity {
             }
         });
     }
-
 }
