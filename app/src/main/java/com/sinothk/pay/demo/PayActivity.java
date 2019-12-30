@@ -39,9 +39,7 @@ public class PayActivity extends Activity {
 
                 try {
 //					byte[] buf = Util.httpGet(url);
-
                     byte[] buf = null;
-
 
                     if (buf != null && buf.length > 0) {
                         String content = new String(buf);
