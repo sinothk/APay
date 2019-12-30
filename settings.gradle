@@ -1,2 +1,2 @@
-include ':app', ':APay'
+include ':app', ':APay', ':WxPayLibrary', ':ZfbPayLibrary'
 rootProject.name='APayLib'
