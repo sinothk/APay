@@ -16,7 +16,7 @@ APay
 # Step 2. Add the dependency
 
 	dependencies {
-	        implementation 'com.github.sinothk:APay:1.x.1230'
+	        implementation 'com.github.sinothk:APay:1.x.1231'
 	}
 # WX
 
