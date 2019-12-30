@@ -10,5 +10,7 @@ public class WXDemoMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wx_demo_activity_main);
+
+
     }
 }
