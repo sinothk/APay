@@ -3,7 +3,7 @@ package com.sinothk.pay.demo;
 public class Constants {
 
 	// APP_ID 替换为你的应用从官方网站申请到的合法appId
-    public static final String APP_ID = "wxd930ea5d5a258f4f";
+    public static final String APP_ID = "wxe11f60fc197fc8a5";
 
     public static class ShowMsgActivity {
 		public static final String STitle = "showmsg_title";

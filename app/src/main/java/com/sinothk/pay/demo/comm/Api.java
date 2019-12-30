@@ -1,6 +1,12 @@
 package com.sinothk.pay.demo.comm;
 
+import retrofit2.http.GET;
+import rx.Observable;
+
 public interface Api {
+    @GET("app/app_pay.php")
+    Observable<String> getOrderInfo();
+
 
 //    /**
 //     * 获取设备列表 》 通过IMEI
