@@ -47,7 +47,9 @@ public class PayActivity extends AppCompatActivity {
                         Log.e("get server pay params:", content);
 
                         JSONObject json = new JSONObject(content);
+
                         if (null != json && !json.has("retcode")) {
+
                             PayReq req = new PayReq();
                             //req.appId = "wxf8b4f85f3a794e77";  // 测试用appId
                             req.appId = json.getString("appid");
@@ -58,9 +60,12 @@ public class PayActivity extends AppCompatActivity {
                             req.packageValue = json.getString("package");
                             req.sign = json.getString("sign");
                             req.extData = "app data"; // optional
+
                             Toast.makeText(PayActivity.this, "正常调起支付", Toast.LENGTH_SHORT).show();
                             // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
+
                             api.sendReq(req);
+
                         } else {
                             Log.d("PAY_GET", "返回错误" + json.getString("retmsg"));
                             Toast.makeText(PayActivity.this, "返回错误" + json.getString("retmsg"), Toast.LENGTH_SHORT).show();

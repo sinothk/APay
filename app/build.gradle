@@ -27,4 +27,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     implementation project(path: ':APay')
+    implementation 'com.github.sinothk:RxRetrofit:8.x.1010'
 }
