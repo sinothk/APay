@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
-// com.zkhy.community com.sinothk.pay.demo
+// com.zkhy.community com.sinothk.pay.demo net.sourceforge.simcpux
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "net.sourceforge.simcpux"
+        applicationId "com.zkhy.community"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
@@ -15,6 +15,36 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    // 签名
+    signingConfigs {
+        release {
+            storeFile file('zkhy_release.jks')
+            storePassword 'Abc123456789'
+            keyAlias 'Abc1_9'
+            keyPassword 'Abc123456789'
+        }
+        debug {
+            storeFile file('zkhy_debug.jks')
+            storePassword 'Abc123456789'
+            keyAlias 'Abc1_9'
+            keyPassword 'Abc123456789'
+        }
+        buildTypes {
+            debug {
+                signingConfig signingConfigs.debug
+            }
+            release {
+                signingConfig signingConfigs.release
+            }
+        }
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "APay_v${defaultConfig.versionName}_${defaultConfig.versionCode}_${buildType.name}_${new Date().format("MMddHH")}.apk"
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.sinothk.pay.demo.wxapi;
+package com.zkhy.community.wxapi;
 
 import android.app.AlertDialog;
 import android.content.Intent;
