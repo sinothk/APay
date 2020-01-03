@@ -10,9 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.sinothk.pay.APay;
 import com.sinothk.pay.demo.R;
-import com.sinothk.pay.utils.TimeUtil;
 import com.tencent.mm.opensdk.modelpay.PayReq;
-import com.tencent.mm.opensdk.openapi.IWXAPI;
 
 import org.json.JSONObject;
 
@@ -31,27 +29,29 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-public class PayActivity extends AppCompatActivity {
+public class PayActivityBack extends AppCompatActivity {
     private static String TAG = "PayActivity";
-    private IWXAPI api;
+//    private IWXAPI api;
 
 //    https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_1
-//        https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_5
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wx_pay);
 
-        api = APay.initWxPay(this, Constants.APP_ID);
-        // 将该app注册到微信
-        api.registerApp(Constants.APP_ID);
+        APay.initWxPay(this, Constants.APP_ID);
+
+
+//        https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_5
+
+//        api = WXAPIFactory.createWXAPI(this, Constants.APP_ID);
 
         findViewById(R.id.check_pay_btn).setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Toast.makeText(PayActivity.this, APay.checkWxEnable() ? "版本支持支付" : "版本不支持", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PayActivityBack.this, APay.checkWxEnable() ? "版本支持支付" : "版本不支持", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -60,7 +60,7 @@ public class PayActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(PayActivity.this, "获取订单中...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PayActivityBack.this, "获取订单中...", Toast.LENGTH_SHORT).show();
 
                 new Thread(new Runnable() {
                     @Override
@@ -82,7 +82,7 @@ public class PayActivity extends AppCompatActivity {
                                 trustAllHosts();
                                 HttpsURLConnection https = (HttpsURLConnection) url
                                         .openConnection();
-                                https.setHostnameVerifier(PayActivity.DO_NOT_VERIFY);
+                                https.setHostnameVerifier(PayActivityBack.DO_NOT_VERIFY);
                                 httpsConn = https;
                             } else {
                                 httpsConn = (HttpURLConnection) url.openConnection();
@@ -109,24 +109,24 @@ public class PayActivity extends AppCompatActivity {
 
                                 JSONObject json = new JSONObject(httpResult);
 //
-                                if ("SUCCESS".equals(json.getString("result_code"))) {
+                                if (!json.has("result_code")) {
 
                                     PayReq req = new PayReq();
                                     //req.appId = "wxf8b4f85f3a794e77";  // 测试用appId
                                     req.appId = json.getString("appid");
 
-                                    req.partnerId = json.getString("mch_id");
-                                    req.prepayId = json.getString("prepay_id");
-                                    req.nonceStr = json.getString("nonce_str");
+                                    req.partnerId = json.getString("partnerid");
+                                    req.prepayId = json.getString("prepayid");
+                                    req.nonceStr = json.getString("noncestr");
+                                    req.timeStamp = json.getString("timestamp");
+                                    req.packageValue = json.getString("package");
                                     req.sign = json.getString("sign");
-                                    req.timeStamp = TimeUtil.StringToTimestamp();
-                                    req.packageValue = "Sign=WXPay";
                                     req.extData = "appData"; // optional
 
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            Toast.makeText(PayActivity.this, "正常调起支付", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(PayActivityBack.this, "正常调起支付", Toast.LENGTH_SHORT).show();
                                         }
                                     });
 
@@ -135,12 +135,7 @@ public class PayActivity extends AppCompatActivity {
                                     APay.sendWxReq(req);
                                 } else {
                                     Log.d("PAY_GET", "服务器请求错误");
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            Toast.makeText(PayActivity.this, "服务器请求错误", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
+                                    Toast.makeText(PayActivityBack.this, "服务器请求错误", Toast.LENGTH_SHORT).show();
                                 }
 
 //                     {"appid":"wxb4ba3c02aa476ea1","partnerid":"1900006771","package":"Sign=WXPay","noncestr":"4b5a09a6e1457fd76999b6f695cef5c5","timestamp":1577690868,"prepayid":"wx30152748534403a7311e681b1710750332","sign":"1CBC0F471DC324E7DA29C144E40D9FB4"}

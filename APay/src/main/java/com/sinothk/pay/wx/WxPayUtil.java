@@ -13,8 +13,9 @@ public class WxPayUtil {
     private WxPayUtil() {
     }
 
-    public static void createWXAPI(Context mContext, String appId) {
+    public static IWXAPI createWXAPI(Context mContext, String appId) {
         api = WXAPIFactory.createWXAPI(mContext, appId);
+        return api;
     }
 
     public static void sendReq(PayReq payReq) {
