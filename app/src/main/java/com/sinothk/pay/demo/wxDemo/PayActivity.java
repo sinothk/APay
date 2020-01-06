@@ -62,6 +62,29 @@ public class PayActivity extends AppCompatActivity {
 
                 Toast.makeText(PayActivity.this, "获取订单中...", Toast.LENGTH_SHORT).show();
 
+//                PayReq req = new PayReq();
+//                //req.appId = "wxf8b4f85f3a794e77";  // 测试用appId
+//                req.appId = "wxe11f60fc197fc8a5";
+//                req.partnerId = "1571810961";
+//                req.prepayId = "wx05130301799143f7ad1fce311326553300";
+//                req.nonceStr = "G0INyYyN8KxfASGB";
+//                req.sign = "74898E804804E7BAE6D38C7EA5D73BA7";
+//                req.timeStamp = TimeUtil.StringToTimestamp();
+//                req.packageValue = "Sign=WXPay";
+//                req.extData = "appData"; // optional
+//
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Toast.makeText(PayActivity.this, "正常调起支付", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//
+//                // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
+////                                    api.sendReq(req);
+//                APay.sendWxReq(req);
+
+
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
