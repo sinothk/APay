@@ -13,6 +13,7 @@ import com.sinothk.pay.demo.R;
 import com.sinothk.pay.utils.TimeUtil;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import org.json.JSONObject;
 
@@ -23,6 +24,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.Date;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -43,7 +45,7 @@ public class PayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wx_pay);
 
-        api = APay.initWxPay(this, Constants.APP_ID);
+        api = WXAPIFactory.createWXAPI(this, null);
         // 将该app注册到微信
         api.registerApp(Constants.APP_ID);
 
@@ -92,7 +94,8 @@ public class PayActivity extends AppCompatActivity {
                         InputStream in;
                         String httpResult = null;
 
-                        String httpsUrl = "http://192.168.1.165:9001/wxpay/unified";
+//                        String httpsUrl = "http://192.168.1.165:9001/wxpay/unified";
+                        String httpsUrl = "http://zpf646503249.vicp.cc/wxpay/unified";
 
                         try {
                             URL url = new URL(httpsUrl);
@@ -134,17 +137,21 @@ public class PayActivity extends AppCompatActivity {
 //
                                 if ("SUCCESS".equals(json.getString("result_code"))) {
 
-                                    PayReq req = new PayReq();
+//                                    api = WXAPIFactory.createWXAPI(PayActivity.this, null);
+//                                    // 将该app注册到微信
+//                                    api.registerApp(Constants.APP_ID);
+
+                                    final PayReq req = new PayReq();
                                     //req.appId = "wxf8b4f85f3a794e77";  // 测试用appId
                                     req.appId = json.getString("appid");
 
                                     req.partnerId = json.getString("mch_id");
                                     req.prepayId = json.getString("prepay_id");
-                                    req.nonceStr = json.getString("nonce_str");
+                                    req.nonceStr = json.getString("nonce_str"); // new Date().getTime() + "";//
                                     req.sign = json.getString("sign");
-                                    req.timeStamp = TimeUtil.StringToTimestamp();
+                                    req.timeStamp = json.getString("timestamp");// TimeUtil.StringToTimestamp();
                                     req.packageValue = "Sign=WXPay";
-                                    req.extData = "appData"; // optional
+//                                    req.extData = "appData"; // optional
 
                                     runOnUiThread(new Runnable() {
                                         @Override
@@ -154,8 +161,14 @@ public class PayActivity extends AppCompatActivity {
                                     });
 
                                     // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
-//                                    api.sendReq(req);
-                                    APay.sendWxReq(req);
+
+                                    new Thread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            api.sendReq(req);
+//                                    APay.sendWxReq(req);
+                                        }
+                                    }).start();
                                 } else {
                                     Log.d("PAY_GET", "服务器请求错误");
                                     runOnUiThread(new Runnable() {

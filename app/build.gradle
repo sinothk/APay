@@ -27,7 +27,7 @@ android {
             keyPassword 'Abc123456789'
         }
         debug {
-            storeFile file('zkhy_debug.jks')
+            storeFile file('zkhy_release.jks')
             storePassword 'Abc123456789'
             keyAlias 'Abc1_9'
             keyPassword 'Abc123456789'
